@@ -1,5 +1,5 @@
 'use client';
-
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLayout, gnbMenus, type GnbMenu } from '@/contexts/LayoutContext';
@@ -16,13 +16,22 @@ export function Sidebar() {
   } = useLayout();
 
   const currentGnbLabel = gnbMenus.find((m) => m.id === activeGnb)?.label || '';
+  // const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update(); // 초기 계산
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   return (
     <>
       {/* 오버레이 (모바일) */}
       <div
         className="sidebar__overlay"
-        data-visible={isSidebarOpen}
+        data-visible={isMobile && isSidebarOpen}
         onClick={closeSidebar}
         aria-hidden="true"
       />

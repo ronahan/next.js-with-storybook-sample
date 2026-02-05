@@ -4,6 +4,7 @@ import { Sidebar } from './Sidebar';
 import { LayoutProvider } from '@/contexts/LayoutContext';
 import '@/styles/layout.css';
 
+
 const withProviders = (Story: () => ReactNode) => (
   <LayoutProvider>
     <div style={{ marginTop: 60 }}>

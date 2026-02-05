@@ -7,6 +7,7 @@ import { Header } from '@/components/layout/Header/Header';
 import { Sidebar } from '@/components/layout/Sidebar/Sidebar';
 import '@/styles/layout.css';
 
+
 type DashboardLayoutProps = {
   children: ReactNode;
 };

@@ -486,3 +486,22 @@
     transition: none;
   }
 }
+/* 기본: 모바일 */
+.header__toggle {
+  display: none;
+}
+
+.header__toggle--mobile {
+  display: flex;
+}
+
+/* 데스크탑 */
+@media (min-width: 768px) {
+  .header__toggle {
+    display: flex;
+  }
+
+  .header__toggle--mobile {
+    display: none;
+  }
+}

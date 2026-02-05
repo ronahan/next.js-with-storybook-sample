@@ -31,7 +31,7 @@ export const Submit: Story = {
 
 export const Disabled: Story = {
   args: {
-    children: '로그인 중...',
+    children: '버튼 비활성화',
     disabled: true,
   },
 };

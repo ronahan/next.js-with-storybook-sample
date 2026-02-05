@@ -5,6 +5,7 @@ import { LayoutProvider } from '@/contexts/LayoutContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import '@/styles/layout.css';
 
+
 const withProviders = (Story: () => ReactNode) => (
   <AuthProvider>
     <LayoutProvider>
