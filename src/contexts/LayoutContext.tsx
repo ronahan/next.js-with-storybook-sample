@@ -46,10 +46,10 @@ export const sidebarMenus: Record<GnbMenu, MenuItem[]> = {
 
 // GNB 메뉴 정보
 export const gnbMenus: { id: GnbMenu; label: string }[] = [
-  { id: 'dashboard', label: '대시보드' },
-  { id: 'users', label: '사용자' },
-  { id: 'products', label: '상품' },
-  { id: 'settings', label: '설정' },
+  { id: 'dashboard', label: '복원력' },
+  { id: 'users', label: '1depth' },
+  { id: 'products', label: '1depth' },
+  { id: 'settings', label: '1depth' },
 ];
 
 type LayoutContextType = {
