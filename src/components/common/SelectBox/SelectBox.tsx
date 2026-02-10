@@ -85,14 +85,13 @@ export function SelectBox({
   }, [open]);
 
   /* -------------------------------------------------------
-   * 열릴 때 포커스 위치 설정
+   * 드롭다운 열기 (열리는 시점에 포커스 인덱스 계산)
    * -----------------------------------------------------*/
-  useEffect(() => {
-    if (!open) return;
-
+  const openDropdown = () => {
     const index = options.findIndex(o => o.value === value);
     setFocusedIndex(index >= 0 ? index : 0);
-  }, [open, options, value]);
+    setOpen(true);
+  };
 
   /* -------------------------------------------------------
    * 값 변경 커밋
@@ -116,15 +115,15 @@ export function SelectBox({
       case 'Enter':
       case ' ':
         e.preventDefault();
-        if (!open) setOpen(true);
+        if (!open) openDropdown();
         else if (focusedIndex >= 0)
           commitChange(options[focusedIndex].value);
         break;
 
       case 'ArrowDown':
         e.preventDefault();
-        setOpen(true);
-        setFocusedIndex(i => Math.min(i + 1, options.length - 1));
+        if (!open) openDropdown();
+        else setFocusedIndex(i => Math.min(i + 1, options.length - 1));
         break;
 
       case 'ArrowUp':
@@ -160,7 +159,7 @@ export function SelectBox({
         disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={open}
-        onClick={() => setOpen(o => !o)}
+        onClick={() => (open ? setOpen(false) : openDropdown())}
         onKeyDown={handleKeyDown}
       >
         <span className={selectedOption ? styles.value : styles.placeholder}>
