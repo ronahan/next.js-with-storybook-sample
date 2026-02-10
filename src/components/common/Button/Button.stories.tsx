@@ -5,6 +5,14 @@ const meta: Meta<typeof Button> = {
   title: 'Common/Button',
   component: Button,
   argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'danger'],
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+    },
     type: {
       control: 'select',
       options: ['button', 'submit', 'reset'],
@@ -17,15 +25,43 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    children: '로그인',
-    type: 'button',
+    children: '확인',
+    variant: 'primary',
   },
 };
 
-export const Submit: Story = {
+export const Secondary: Story = {
   args: {
-    children: '제출하기',
-    type: 'submit',
+    children: '취소',
+    variant: 'secondary',
+  },
+};
+
+export const Danger: Story = {
+  args: {
+    children: '삭제',
+    variant: 'danger',
+  },
+};
+
+export const Small: Story = {
+  args: {
+    children: '작은 버튼',
+    size: 'sm',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    children: '큰 버튼',
+    size: 'lg',
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    children: '로그인',
+    fullWidth: true,
   },
 };
 

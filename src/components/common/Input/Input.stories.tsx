@@ -58,3 +58,12 @@ export const Password: Story = {
     required: true,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    id: 'input-disabled',
+    label: '비활성화',
+    value: '수정 불가',
+    disabled: true,
+  },
+};

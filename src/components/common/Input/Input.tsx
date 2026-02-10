@@ -1,16 +1,50 @@
 'use client';
 
-type InputProps = {
+import styles from './Input.module.css';
+
+/* =========================================================
+ * 타입 정의
+ * =======================================================*/
+
+/** Input Props */
+export interface InputProps {
+  /** input 요소 id (label 연결·에러 메시지 연결에 사용) */
   id?: string;
+
+  /** 라벨 텍스트 (없으면 라벨 미렌더링) */
   label?: string;
+
+  /** placeholder 텍스트 */
   placeholder?: string;
-  type?: 'text' | 'email' | 'password';
+
+  /** input 타입 @default 'text' */
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'search' | 'url';
+
+  /** 현재 값 */
   value?: string;
+
+  /** 값 변경 핸들러 */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  /** 에러 메시지 (있으면 에러 스타일 적용 + 메시지 표시) */
   error?: string;
+
+  /** HTML autocomplete 속성 */
   autoComplete?: string;
+
+  /** 필수 입력 여부 (라벨 옆 * 표시) */
   required?: boolean;
-};
+
+  /** 비활성화 */
+  disabled?: boolean;
+
+  /** 추가 CSS 클래스 (input 요소에 적용) */
+  className?: string;
+}
+
+/* =========================================================
+ * 컴포넌트
+ * =======================================================*/
 
 export function Input({
   id,
@@ -22,21 +56,23 @@ export function Input({
   error,
   autoComplete,
   required,
+  disabled,
+  className,
 }: InputProps) {
+  const inputClassNames = [
+    styles.input,
+    error && styles.inputError,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
-    <div style={{ marginBottom: 16 }}>
+    <div className={styles.wrapper}>
       {label && (
-        <label
-          htmlFor={id}
-          style={{
-            display: 'block',
-            marginBottom: 4,
-            fontSize: 14,
-            fontWeight: 500,
-          }}
-        >
+        <label htmlFor={id} className={styles.label}>
           {label}
-          {required && <span style={{ color: '#dc2626', marginLeft: 2 }}>*</span>}
+          {required && <span className={styles.required}>*</span>}
         </label>
       )}
 
@@ -48,30 +84,14 @@ export function Input({
         onChange={onChange}
         autoComplete={autoComplete}
         required={required}
+        disabled={disabled}
         aria-invalid={error ? 'true' : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
-        style={{
-          width: '100%',
-          padding: '10px 12px',
-          fontSize: 14,
-          borderRadius: 4,
-          border: error ? '1px solid #dc2626' : '1px solid #ccc',
-          boxSizing: 'border-box',
-          outline: 'none',
-        }}
+        className={inputClassNames}
       />
 
       {error && (
-        <p
-          id={`${id}-error`}
-          role="alert"
-          style={{
-            color: '#dc2626',
-            fontSize: 12,
-            marginTop: 4,
-            marginBottom: 0,
-          }}
-        >
+        <p id={`${id}-error`} role="alert" className={styles.errorMessage}>
           {error}
         </p>
       )}

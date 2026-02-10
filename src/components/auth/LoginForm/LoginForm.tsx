@@ -76,7 +76,12 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-label="로그인 폼">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      aria-label="로그인 폼"
+      style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+    >
       <Input
         id={`${formId}-email`}
         label="이메일"
@@ -112,16 +117,16 @@ export function LoginForm() {
       />
 
       {submitError && (
-        <p role="alert" style={{ color: '#dc2626', marginBottom: 12, fontSize: 14 }}>
+        <p role="alert" style={{ color: 'var(--color-error)', fontSize: 14 }}>
           {submitError}
         </p>
       )}
 
-      <Button type="submit" disabled={isSubmitting}>
+      <Button type="submit" disabled={isSubmitting} fullWidth>
         {isSubmitting ? '로그인 중...' : '로그인'}
       </Button>
 
-      <p style={{ marginTop: 16, fontSize: 12, color: '#666' }}>
+      <p style={{ fontSize: 12, color: 'var(--color-text-tertiary)' }}>
         테스트 계정: admin@example.com / Admin123!
       </p>
     </form>
