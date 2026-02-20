@@ -1,0 +1,202 @@
+/* =========================================================
+ * Badge — 상태 표시 / 태그 컴포넌트 스타일
+ *
+ * 클래스 조합 규칙:
+ *   .badge                          (베이스 — 항상 포함)
+ *   + .primary|.normal|.success|.warning|.danger|.neutral  (variant — 1개 필수)
+ *   + .solid|.soft                  (tone — 1개 필수)
+ *   + .size-sm|.size-md             (size — 1개 필수)
+ *   + .rounded-md|.rounded-full     (라운딩)
+ *   + .clickable                    (클릭 가능 시)
+ *
+ * 색상 체계:
+ *   globals.css의 시맨틱 변수를 기반으로 구성
+ *   primary  → 연보라 (accent/indigo 계열)
+ *   normal     → 청록-블루 (시그니처 포인트)
+ *   success  → --color-success 계열
+ *   warning  → --color-warning 계열
+ *   danger   → --color-error 계열
+ *   neutral  → --color-bg / --color-border / --color-text 계열
+ *
+ * border 전략:
+ *   solid → border 없음 (배경색 자체가 강한 시각적 구분)
+ *   soft  → 시맨틱 컬러 기반 테두리 (연한 배경에서 영역 구분)
+ * =======================================================*/
+
+/* ---- Base ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ---- Tone: border 전략 ---- */
+.soft {
+  border: 1px solid transparent;
+}
+
+.solid {
+  border: none;
+}
+
+/* ---- Size ---- */
+.size-sm {
+  height: 22px;
+  padding: 0 8px;
+  font-size: 11px;
+}
+
+.size-md {
+  height: 26px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+/* ---- Rounded ---- */
+.rounded-md {
+  border-radius: 6px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+/* ---- Dot (상태 점) ---- */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ---- Icon ---- */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.icon > svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* =========================================================
+ * Variant × Tone 조합
+ *
+ * solid: 묵직한 배경 + 고대비 텍스트 (border 없음)
+ * soft:  연한 배경 + 시맨틱 컬러 텍스트 + 테두리
+ * =======================================================*/
+
+/* ---- primary (연보라 / accent 계열) ---- */
+.primary.solid {
+  background: var(--badge-primary-solid, #6366f1);
+  color: #eef2ff;
+}
+
+.primary.soft {
+  background: var(--badge-primary-soft-bg, #1e1b4b);
+  color: var(--badge-primary-solid, #818cf8);
+  border-color: color-mix(in srgb, var(--badge-primary-solid, #818cf8) 30%, transparent);
+}
+
+/* ---- normal (청록-블루) ---- */
+.normal.solid {
+  background: var(--badge-normal-solid, #0ea5e9);
+  color: #f0f9ff;
+}
+
+.normal.soft {
+  background: var(--badge-normal-soft-bg, #0b2940);
+  color: var(--badge-normal-solid, #0ea5e9);
+  border-color: color-mix(in srgb, var(--badge-normal-solid, #0ea5e9) 30%, transparent);
+}
+
+/* ---- success (딥 그린) ---- */
+.success.solid {
+  background: var(--badge-success-solid, #15803d);
+  color: #f0fdf4;
+}
+
+.success.soft {
+  background: var(--badge-success-soft-bg, #052e1b);
+  color: var(--badge-success-solid, #15803d);
+  border-color: color-mix(in srgb, var(--badge-success-solid, #15803d) 30%, transparent);
+}
+
+/* ---- warning (탁한 오렌지) ---- */
+.warning.solid {
+  background: var(--badge-warning-solid, #c2410c);
+  color: #fff7ed;
+}
+
+.warning.soft {
+  background: var(--badge-warning-soft-bg, #3a1e05);
+  color: var(--badge-warning-solid, #c2410c);
+  border-color: color-mix(in srgb, var(--badge-warning-solid, #c2410c) 30%, transparent);
+}
+
+/* ---- danger (깊은 레드) ---- */
+.danger.solid {
+  background: var(--badge-danger-solid, #b91c1c);
+  color: #fef2f2;
+}
+
+.danger.soft {
+  background: var(--badge-danger-soft-bg, #2a0b0b);
+  color: var(--badge-danger-solid, #b91c1c);
+  border-color: color-mix(in srgb, var(--badge-danger-solid, #b91c1c) 30%, transparent);
+}
+
+/* ---- neutral (슬레이트) ---- */
+.neutral.solid {
+  background: var(--badge-neutral-solid, #334155);
+  color: #f1f5f9;
+}
+
+.neutral.soft {
+  background: var(--badge-neutral-soft-bg, #1e293b);
+  color: var(--badge-neutral-soft-text, #94a3b8);
+  border-color: color-mix(in srgb, var(--badge-neutral-soft-text, #94a3b8) 30%, transparent);
+}
+
+/* =========================================================
+ * Clickable
+ * =======================================================*/
+
+.clickable {
+  cursor: pointer;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+  /* button 초기화 */
+  font-family: inherit;
+  outline: none;
+}
+
+.clickable:hover:not(:disabled) {
+  filter: brightness(1.2);
+}
+
+.clickable:active:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.clickable:focus-visible {
+  outline: 2px solid var(--color-accent, #818cf8);
+  outline-offset: 2px;
+}
+
+.clickable:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ---- A11y: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .clickable {
+    transition: none;
+  }
+}

@@ -1,13 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { useState } from 'react';
 import { Input } from './Input';
 
 const meta: Meta<typeof Input> = {
   title: 'Common/Input',
   component: Input,
+  tags: ['autodocs'],
   argTypes: {
     type: {
       control: 'select',
       options: ['text', 'email', 'password'],
+    },
+    variant: {
+      control: 'select',
+      options: ['default', 'search'],
     },
   },
 };
@@ -59,11 +65,64 @@ export const Password: Story = {
   },
 };
 
+export const ReadOnly: Story = {
+  args: {
+    id: 'input-readonly',
+    label: '탐지 IP',
+    value: '192.168.1.100',
+    readOnly: true,
+  },
+};
+
 export const Disabled: Story = {
   args: {
     id: 'input-disabled',
     label: '비활성화',
     value: '수정 불가',
     disabled: true,
+  },
+};
+
+export const Search: Story = {
+  args: {
+    id: 'input-search',
+    variant: 'search',
+    placeholder: '검색어를 입력하세요',
+    value: '',
+  },
+  render: function Render(args) {
+    const [value, setValue] = useState(args.value ?? '');
+    return (
+      <div style={{ width: 300 }}>
+        <Input
+          {...args}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onSearch={(v) => console.log('검색:', v)}
+        />
+      </div>
+    );
+  },
+};
+
+export const SearchWithValue: Story = {
+  args: {
+    id: 'input-search-value',
+    variant: 'search',
+    placeholder: '검색어를 입력하세요',
+    value: '사용자',
+  },
+  render: function Render(args) {
+    const [value, setValue] = useState(args.value ?? '');
+    return (
+      <div style={{ width: 300 }}>
+        <Input
+          {...args}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onSearch={(v) => console.log('검색:', v)}
+        />
+      </div>
+    );
   },
 };

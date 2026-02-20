@@ -5,13 +5,16 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLayout, gnbMenus, type GnbMenu } from '@/contexts/LayoutContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useLocale, locales, localeNames, type Locale } from '@/contexts/LocaleContext';
 
 export function Header() {
   const { user, logout } = useAuth();
   const { activeGnb, setActiveGnb, toggleSidebarCollapse, toggleSidebar, isSidebarCollapsed } = useLayout();
   const { theme, toggleTheme } = useTheme();
+  const { lang, setLang, t } = useLocale();
   const [searchQuery, setSearchQuery] = useState('');
   const searchId = useId();
+  const langSelectId = useId();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,13 +86,33 @@ export function Header() {
       </nav>
 
       <div className="header__right">
+        {/* 언어 전환 */}
+        <div className="lang-select">
+          <label htmlFor={langSelectId} className="visually-hidden">
+            {t('header.selectLanguage')}
+          </label>
+          <select
+            id={langSelectId}
+            className="lang-select__dropdown"
+            value={lang}
+            onChange={(e) => setLang(e.target.value as Locale)}
+            aria-label={t('header.selectLanguage')}
+          >
+            {locales.map((locale) => (
+              <option key={locale} value={locale}>
+                {localeNames[locale]}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {/* 테마 토글 */}
         <button
           type="button"
           className="theme-toggle"
           onClick={toggleTheme}
-          aria-label={theme === 'light' ? '다크 모드로 전환' : '라이트 모드로 전환'}
-          title={theme === 'light' ? '다크 모드' : '라이트 모드'}
+          aria-label={theme === 'light' ? t('common.switchToDarkMode') : t('common.switchToLightMode')}
+          title={theme === 'light' ? t('common.darkMode') : t('common.lightMode')}
         >
           {theme === 'light' ? (
             <svg
@@ -133,7 +156,7 @@ export function Header() {
         {/* 검색 */}
         <form className="header__search" onSubmit={handleSearch} role="search">
           <label htmlFor={searchId} className="visually-hidden">
-            검색
+            {t('common.search')}
           </label>
           <svg className="header__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <circle cx="11" cy="11" r="8" />
@@ -143,12 +166,14 @@ export function Header() {
             id={searchId}
             type="search"
             className="header__search-input"
-            placeholder="검색..."
+            placeholder={t('common.search')+'..'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </form>
-
+<span style={{ fontSize: 12, marginLeft: 8 }}>
+  ({lang})
+</span>
         {/* 사용자 정보 */}
         <div className="user-info">
           {user && <span className="user-info__name">{user.name}님</span>}

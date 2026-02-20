@@ -4,29 +4,75 @@
  * 클래스 조합 규칙:
  *   .wrapper          (최외곽 — 항상 포함)
  *     .label          (라벨 — label prop 있을 때)
- *     .input          (입력 필드 — 항상 포함)
- *       + .inputError (에러 상태 — error prop 있을 때)
+ *     .inputWrapper   (input + 아이콘 감싸는 영역)
+ *       .startIcon    (왼쪽 아이콘)
+ *       .input        (입력 필드 — 항상 포함)
+ *         + .inputError    (에러 상태)
+ *         + .hasStartIcon  (왼쪽 아이콘 있을 때 패딩)
+ *         + .hasEndIcon    (오른쪽 아이콘 있을 때 패딩)
+ *       .endIcon      (오른쪽 아이콘)
  *     .errorMessage   (에러 텍스트 — error prop 있을 때)
  * =======================================================*/
 
 /* ---- Wrapper ---- */
 .wrapper {
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 
 /* ---- Label ---- */
 .label {
   display: block;
   margin-bottom: 6px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: var(--color-text-primary, #f1f5f9);
 }
 
 .required {
-  color: var(--color-error);
+  color: var(--color-error, #f87171);
   margin-left: 2px;
+}
+
+/* ---- Input wrapper (아이콘 포지셔닝용) ---- */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ---- Icon ---- */
+.startIcon,
+.endIcon {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  pointer-events: none;
+  color: var(--color-text-tertiary, #94a3b8);
+}
+
+.startIcon {
+  left: 12px;
+}
+
+.endIcon {
+  right: 12px;
+  pointer-events: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-text-tertiary, #94a3b8);
+  transition: color 0.2s ease;
+}
+
+.endIcon:hover {
+  color: var(--color-text-primary, #f1f5f9);
+}
+
+.startIcon > svg,
+.endIcon > svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* ---- Input ---- */
@@ -35,49 +81,76 @@
   height: 40px;
   padding: 0 12px;
   font-size: 14px;
-  color: var(--color-text-primary);
-  background: var(--color-bg-primary);
-  border: 1px solid var(--color-border);
+  color: var(--color-text-primary, #f1f5f9);
+  background: var(--color-bg-primary, #0f172a);
+  border: 1px solid var(--color-border, #334155);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.hasStartIcon {
+  padding-left: 36px;
+}
+
+.hasEndIcon {
+  padding-right: 36px;
+}
+
+/* ---- 기본 search clear 버튼 숨기기 ---- */
+.input[type="search"]::-webkit-search-cancel-button,
+.input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .input::placeholder {
-  color: var(--color-text-tertiary);
+  color: var(--color-text-tertiary, #94a3b8);
 }
 
 .input:hover:not(:disabled) {
-  border-color: var(--color-border-hover);
+  border-color: var(--color-border-hover, #475569);
 }
 
 .input:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-light);
+  border-color: var(--color-accent, #818cf8);
+  box-shadow: 0 0 0 3px var(--color-accent-light, #1e1b4b);
 }
 
 /* ---- State: error ---- */
 .inputError {
-  border-color: var(--color-error);
+  border-color: var(--color-error, #f87171);
 }
 
 .inputError:focus {
-  border-color: var(--color-error);
-  box-shadow: 0 0 0 3px var(--color-error-bg);
+  border-color: var(--color-error, #f87171);
+  box-shadow: 0 0 0 3px var(--color-error-bg, #450a0a);
+}
+
+/* ---- State: readOnly ---- */
+.readOnly {
+  cursor: default;
+  background: var(--color-bg-tertiary, #334155);
+  border-color: var(--color-border, #334155);
+}
+
+.readOnly:focus {
+  border-color: var(--color-border, #334155);
+  box-shadow: none;
 }
 
 /* ---- State: disabled ---- */
 .input:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-  background: var(--color-bg-tertiary);
+  background: var(--color-bg-tertiary, #334155);
 }
 
 /* ---- Error message ---- */
 .errorMessage {
   margin-top: 4px;
   font-size: 12px;
-  color: var(--color-error);
+  color: var(--color-error, #f87171);
 }
 
 /* ---- A11y: reduced motion ---- */

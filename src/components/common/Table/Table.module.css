@@ -1,0 +1,105 @@
+/* =========================================================
+ * Table — Compound Component 스타일
+ *
+ * 클래스 조합 규칙:
+ *   .table               (<table> 최외곽 — 항상 포함)
+ *     .head              (<thead>)
+ *     .body              (<tbody>)
+ *       .row             (<tr> — 항상 포함)
+ *         + .selectable  (선택 가능 행)
+ *         + .selected    (선택된 행)
+ *         .cell          (<td> — 항상 포함)
+ *           + .headerCell (<th> — header=true)
+ *   .scrollWrapper       (scroll=true 시 감싸는 div)
+ *
+ * 사용 CSS Variables:
+ *   --color-bg-primary, --color-bg-secondary, --color-bg-tertiary,
+ *   --color-bg-hover, --color-border, --color-text-primary,
+ *   --color-text-secondary, --color-accent-light
+ * =======================================================*/
+
+/* ---- Table (<table>) ---- */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-border, #334155);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ---- Scroll Wrapper ---- */
+.scrollWrapper {
+  overflow: auto;
+  border: 1px solid var(--color-border, #334155);
+  border-radius: 8px;
+}
+
+.scrollWrapper .table {
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.scrollWrapper .head th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* ---- Head (<thead>) ---- */
+.head {
+  /* 기본 구조용 — 추가 스타일 불필요 */
+}
+
+/* ---- Body (<tbody>) ---- */
+.body {
+  /* 기본 구조용 — 추가 스타일 불필요 */
+}
+
+/* ---- Row (<tr>) ---- */
+.row {
+  /* 기본 구조용 */
+}
+
+/* ---- Cell (<td> / <th>) ---- */
+.cell {
+  padding: 14px 20px;
+  font-size: 14px;
+  color: var(--color-text-primary, #f1f5f9);
+  border-bottom: 1px solid var(--color-border, #334155);
+  width: var(--cell-w, auto);
+  text-align: var(--cell-align, left);
+}
+
+/* ---- Header Cell (<th>) ---- */
+.headerCell {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary, #cbd5e1);
+  background: var(--color-bg-secondary, #1e293b);
+}
+
+/* ---- State: hover (body rows — subtle) ---- */
+.body .row:hover > .cell {
+  background: var(--color-bg-tertiary, #334155);
+}
+
+/* ---- State: selectable ---- */
+.selectable {
+  cursor: pointer;
+}
+
+.body .selectable:hover > .cell {
+  background: var(--color-bg-hover, #475569);
+}
+
+/* ---- State: selected (accent tint) ---- */
+.selected > .cell {
+  background: var(--color-accent-light, #1e1b4b);
+}
+
+/* ---- 마지막 행 border 제거 ---- */
+.body .row:last-child > .cell {
+  border-bottom: none;
+}

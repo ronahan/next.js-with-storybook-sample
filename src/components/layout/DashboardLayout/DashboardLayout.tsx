@@ -2,7 +2,8 @@
 
 import { type ReactNode } from 'react';
 import { LayoutProvider, useLayout } from '@/contexts/LayoutContext';
-import { AuthGuard } from '@/components/auth/AuthGuard/AuthGuard';
+// import { AuthGuard } from '@/components/auth/AuthGuard/AuthGuard';
+import { AdminAuthGuard } from '@/components/auth/AuthGuard/AdminAuthGuard';
 import { Header } from '@/components/layout/Header/Header';
 import { Sidebar } from '@/components/layout/Sidebar/Sidebar';
 import '@/styles/layout.css';
@@ -40,10 +41,10 @@ function DashboardLayoutInner({ children }: DashboardLayoutProps) {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <AuthGuard>
+    <AdminAuthGuard>
       <LayoutProvider>
         <DashboardLayoutInner>{children}</DashboardLayoutInner>
       </LayoutProvider>
-    </AuthGuard>
+    </AdminAuthGuard>
   );
 }

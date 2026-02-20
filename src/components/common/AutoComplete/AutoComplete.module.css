@@ -1,0 +1,181 @@
+/* =========================================================
+ * AutoComplete — 검색 드롭다운 컴포넌트 스타일
+ *
+ * 클래스 조합 규칙:
+ *   .wrapper          (최외곽 — 항상 포함)
+ *     + .disabled     (전체 비활성화)
+ *     .tags           (멀티 모드 — 선택된 태그 영역)
+ *       .tag          (개별 태그)
+ *     .inputWrapper   (Input 감싸기)
+ *     .dropdown       (옵션 목록 — open 시)
+ *       .option       (개별 옵션)
+ *         + .focused  (키보드 포커스)
+ *         + .selected (선택된 옵션)
+ * =======================================================*/
+
+/* ---- Wrapper ---- */
+.wrapper {
+  position: relative;
+  font-size: 14px;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---- Tags (멀티모드) ---- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--color-accent-light, #1e1b4b);
+  color: var(--color-accent, #818cf8);
+  border: 1px solid var(--color-accent, #818cf8);
+  line-height: 1.4;
+}
+
+.tagRemove {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 0 0 2px;
+  color: var(--color-accent, #818cf8);
+  opacity: 0.6;
+  font-size: 12px;
+  line-height: 1;
+  transition: opacity 0.15s ease;
+}
+
+.tagRemove:hover {
+  opacity: 1;
+}
+
+/* ---- Dropdown ---- */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+
+  background: var(--color-bg-primary, #0f172a);
+  border: 1px solid var(--color-border, #334155);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md, 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3));
+
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 4px 0;
+  list-style: none;
+
+  animation: dropdownOpen 0.15s ease-out;
+}
+
+/* ---- Option ---- */
+.option {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--color-text-primary, #f1f5f9);
+  transition: background-color 0.1s ease;
+  display: flex;
+  align-items: center;
+}
+
+.option:hover {
+  background: var(--color-bg-hover, #475569);
+}
+
+/* ---- Option state: focused ---- */
+.focused {
+  background: var(--color-bg-hover, #475569);
+}
+
+/* ---- Option state: selected ---- */
+.selected {
+  background: var(--color-accent-light, #1e1b4b);
+  font-weight: 600;
+}
+
+/* ---- Checkbox (멀티모드) ---- */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--color-border, #334155);
+  border-radius: 3px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.checkboxChecked {
+  background: var(--color-accent, #818cf8);
+  border-color: var(--color-accent, #818cf8);
+  color: #fff;
+}
+
+/* ---- Messages ---- */
+.message {
+  padding: 12px;
+  text-align: center;
+  color: var(--color-text-tertiary, #94a3b8);
+  font-size: 13px;
+}
+
+/* ---- Label ---- */
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-primary, #f1f5f9);
+}
+
+.required {
+  color: var(--color-error, #f87171);
+  margin-left: 2px;
+}
+
+/* ---- Animation ---- */
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- A11y: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .dropdown {
+    animation: none;
+  }
+
+  .option {
+    transition: none;
+  }
+
+  .checkbox {
+    transition: none;
+  }
+}

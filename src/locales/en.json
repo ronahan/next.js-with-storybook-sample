@@ -1,0 +1,35 @@
+{
+  "common": {
+    "search": "Search",
+    "logout": "Logout",
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "switchToDarkMode": "Switch to dark mode",
+    "switchToLightMode": "Switch to light mode",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar",
+    "openMenu": "Open menu",
+    "mainMenu": "Main menu",
+    "home": "Home"
+  },
+  "header": {
+    "adminDashboardHome": "Admin Dashboard Home",
+    "searchPlaceholder": "Search...",
+    "greeting": "Hello, {name}",
+    "selectLanguage": "Select language"
+  },
+  "gnb": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "settings": "Settings",
+    "analytics": "Analytics"
+  },
+  "language": {
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語",
+    "zh-CN": "简体中文"
+  }
+}

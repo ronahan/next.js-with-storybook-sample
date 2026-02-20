@@ -1,0 +1,35 @@
+{
+  "common": {
+    "search": "검색",
+    "logout": "로그아웃",
+    "admin": "관리자",
+    "dashboard": "대시보드",
+    "darkMode": "다크 모드",
+    "lightMode": "라이트 모드",
+    "switchToDarkMode": "다크 모드로 전환",
+    "switchToLightMode": "라이트 모드로 전환",
+    "expandSidebar": "사이드바 펼치기",
+    "collapseSidebar": "사이드바 접기",
+    "openMenu": "메뉴 열기",
+    "mainMenu": "주 메뉴",
+    "home": "홈"
+  },
+  "header": {
+    "adminDashboardHome": "관리자 대시보드 홈",
+    "searchPlaceholder": "검색...",
+    "greeting": "{name}님",
+    "selectLanguage": "언어 선택"
+  },
+  "gnb": {
+    "dashboard": "대시보드",
+    "users": "사용자",
+    "settings": "설정",
+    "analytics": "분석"
+  },
+  "language": {
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語",
+    "zh-CN": "简体中文"
+  }
+}

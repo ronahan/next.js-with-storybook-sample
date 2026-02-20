@@ -1,0 +1,126 @@
+/* =========================================================
+ * Checkbox — 공통 체크박스 컴포넌트 스타일
+ *
+ * 클래스 조합 규칙:
+ *   .wrapper              (<label> 최외곽 — 항상 포함)
+ *     + .disabled          (비활성화)
+ *     .input               (숨김 처리된 native checkbox)
+ *     .box                 (시각적 체크박스 — 항상 포함)
+ *       + .sm | .md        (사이즈)
+ *       + .active          (checked)
+ *       + .indeterminate   (불확정 상태 — 시각 전용)
+ *     .text                (라벨 텍스트)
+ * =======================================================*/
+
+/* ---- Wrapper (<label>) ---- */
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ---- Hidden input ---- */
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Text (라벨 텍스트) ---- */
+.text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary, #f1f5f9);
+}
+
+/* ---- Box (시각적 체크박스) ---- */
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-border, #334155);
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+  transform: translateY(1px); /* 정렬 */
+}
+
+/* ---- Size ---- */
+.sm {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.md {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---- SVG 크기 ---- */
+
+.sm > svg {
+  width: 10px;
+  height: 10px;
+}
+
+.md > svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ---- State: active (checked) ---- */
+.active {
+  background: var(--color-accent, #818cf8);
+  border-color: var(--color-accent, #818cf8);
+}
+
+/* ---- State: indeterminate (시각 전용 — checked와 독립) ---- */
+.indeterminate {
+  background: var(--color-accent, #818cf8);
+  border-color: var(--color-accent, #818cf8);
+}
+
+/* ---- State: hover ---- */
+.wrapper:hover .box {
+  border-color: var(--color-accent, #818cf8);
+}
+
+.wrapper:hover .active,
+.wrapper:hover .indeterminate {
+  filter: brightness(1.1);
+}
+
+/* ---- State: focus (hidden input → adjacent box) ---- */
+.input:focus-visible + .box {
+  box-shadow: 0 0 0 3px var(--color-accent-light, #1e1b4b);
+}
+
+/* ---- State: disabled ---- */
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.disabled .text {
+  cursor: not-allowed;
+}
+
+
+/* ---- A11y: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .box {
+    transition: none;
+  }
+}

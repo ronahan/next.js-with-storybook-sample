@@ -3,9 +3,11 @@
  *
  * 클래스 조합 규칙:
  *   .button          (베이스 — 항상 포함)
- *   + .primary|.secondary|.danger   (variant — 1개 필수)
+ *   + .primary|.secondary|.danger|.ghost (variant — 1개 필수)
  *   + .sm|.md|.lg                   (size — 1개 필수)
+ *   + .iconOnly                     (아이콘 전용 — 정사각형)
  *   + .fullWidth                    (옵션)
+ *   + .loading                      (로딩 상태)
  * =======================================================*/
 
 /* ---- Base ---- */
@@ -13,7 +15,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
 
   border: 1px solid transparent;
   border-radius: 8px;
@@ -44,37 +45,130 @@
 
 /* ---- Variant: primary ---- */
 .primary {
-  background: var(--color-accent);
-  color: var(--color-accent-text);
-  border-color: var(--color-accent);
+  background: var(--color-accent, #818cf8);
+  color: var(--color-accent-text, #0f172a);
+  border-color: var(--color-accent, #818cf8);
 }
 
 .primary:hover:not(:disabled) {
-  background: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
+  background: var(--color-accent-hover, #a5b4fc);
+  border-color: var(--color-accent-hover, #a5b4fc);
 }
 
 /* ---- Variant: secondary ---- */
 .secondary {
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  border-color: var(--color-border);
+  background: var(--color-bg-primary, #0f172a);
+  color: var(--color-text-primary, #f1f5f9);
+  border-color: var(--color-border, #334155);
 }
 
 .secondary:hover:not(:disabled) {
-  background: var(--color-bg-hover);
-  border-color: var(--color-border-hover);
+  background: var(--color-bg-hover, #475569);
+  border-color: var(--color-border-hover, #475569);
 }
 
 /* ---- Variant: danger ---- */
 .danger {
-  background: var(--color-error);
-  color: var(--color-text-inverse);
-  border-color: var(--color-error);
+  background: var(--color-error, #f87171);
+  color: var(--color-text-inverse, #0f172a);
+  border-color: var(--color-error, #f87171);
 }
 
 .danger:hover:not(:disabled) {
   opacity: 0.85;
+}
+
+/* ---- Variant: ghost ---- */
+.ghost {
+  background: transparent;
+  color: var(--color-text-secondary, #cbd5e1);
+  border-color: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--color-bg-hover, #475569);
+  color: var(--color-text-primary, #f1f5f9);
+}
+
+/* ---- Content wrapper ---- */
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---- Icon ---- */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.sm .icon {
+  font-size: 14px;
+}
+
+.md .icon {
+  font-size: 16px;
+}
+
+.lg .icon {
+  font-size: 20px;
+}
+
+.icon > svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* ---- Modifier: iconOnly ---- */
+.iconOnly {
+  padding: 0;
+}
+
+.iconOnly.sm {
+  width: 32px;
+}
+
+.iconOnly.md {
+  width: 40px;
+}
+
+.iconOnly.lg {
+  width: 48px;
+}
+
+/* ---- State: loading ---- */
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.loadingContent {
+  visibility: hidden;
+}
+
+.spinnerWrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ---- Modifier: fullWidth ---- */
@@ -90,7 +184,7 @@
 
 /* ---- State: focus ---- */
 .button:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent, #818cf8);
   outline-offset: 2px;
 }
 
@@ -98,5 +192,9 @@
 @media (prefers-reduced-motion: reduce) {
   .button {
     transition: none;
+  }
+
+  .spinner {
+    animation: none;
   }
 }

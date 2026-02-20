@@ -1,0 +1,35 @@
+{
+  "common": {
+    "search": "検索",
+    "logout": "ログアウト",
+    "admin": "管理者",
+    "dashboard": "ダッシュボード",
+    "darkMode": "ダークモード",
+    "lightMode": "ライトモード",
+    "switchToDarkMode": "ダークモードに切り替え",
+    "switchToLightMode": "ライトモードに切り替え",
+    "expandSidebar": "サイドバーを展開",
+    "collapseSidebar": "サイドバーを折りたたむ",
+    "openMenu": "メニューを開く",
+    "mainMenu": "メインメニュー",
+    "home": "ホーム"
+  },
+  "header": {
+    "adminDashboardHome": "管理者ダッシュボードホーム",
+    "searchPlaceholder": "検索...",
+    "greeting": "{name}さん",
+    "selectLanguage": "言語を選択"
+  },
+  "gnb": {
+    "dashboard": "ダッシュボード",
+    "users": "ユーザー",
+    "settings": "設定",
+    "analytics": "分析"
+  },
+  "language": {
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語",
+    "zh-CN": "简体中文"
+  }
+}

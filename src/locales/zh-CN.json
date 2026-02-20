@@ -1,0 +1,35 @@
+{
+  "common": {
+    "search": "搜索",
+    "logout": "退出登录",
+    "admin": "管理员",
+    "dashboard": "仪表盘",
+    "darkMode": "深色模式",
+    "lightMode": "浅色模式",
+    "switchToDarkMode": "切换到深色模式",
+    "switchToLightMode": "切换到浅色模式",
+    "expandSidebar": "展开侧边栏",
+    "collapseSidebar": "折叠侧边栏",
+    "openMenu": "打开菜单",
+    "mainMenu": "主菜单",
+    "home": "首页"
+  },
+  "header": {
+    "adminDashboardHome": "管理员仪表盘首页",
+    "searchPlaceholder": "搜索...",
+    "greeting": "{name}，您好",
+    "selectLanguage": "选择语言"
+  },
+  "gnb": {
+    "dashboard": "仪表盘",
+    "users": "用户",
+    "settings": "设置",
+    "analytics": "分析"
+  },
+  "language": {
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語",
+    "zh-CN": "简体中文"
+  }
+}
