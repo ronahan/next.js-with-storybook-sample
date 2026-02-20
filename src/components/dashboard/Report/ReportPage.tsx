@@ -10,6 +10,7 @@ import type { AutoCompleteOption } from '@/components/common/AutoComplete/AutoCo
 import { Badge } from '@/components/common/Badge/Badge';
 import { Toggle } from '@/components/common/Toggle/Toggle';
 import { Checkbox } from '@/components/common/Checkbox/Checkbox';
+import { LinearProgress, CircularProgress, HalfGaugeProgress } from '@/components/common/Progress';
 import settingIcon from '@/assets/icons/icon_setting.svg';
 
 const ACTIVITY_DATA = [
@@ -101,6 +102,45 @@ export function Report() {
     <section>
       <h1 style={{ marginBottom: 8 }}>Report</h1>
 
+      {/* ── Progress 예시 ── */}
+      <h2 style={{ marginTop: 32, marginBottom: 12 }}>Progress 예시</h2>
+
+      {/* Linear */}
+      <h3 style={{ marginBottom: 8 }}>LinearProgress</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: 360, marginBottom: 24 }}>
+        <LinearProgress value={85} tone="success" />
+        <LinearProgress value={62} tone="warning" size="lg" />
+        <LinearProgress value={40} tone="danger" />
+        <LinearProgress value={73} tone="info" renderLabel={(v) => `${v}/100`} />
+      </div>
+
+      {/* Circular */}
+      <h3 style={{ marginBottom: 8 }}>CircularProgress</h3>
+      <div style={{ display: 'flex', gap: 24, alignItems: 'center', marginBottom: 24 }}>
+        <CircularProgress value={92} tone="success" size="sm" />
+        <CircularProgress value={68} tone="warning" />
+        <CircularProgress value={35} tone="danger" size="lg" />
+        <CircularProgress value={78} tone="info" size="lg"  />
+      </div>
+
+      {/* Half Gauge */}
+      <h3 style={{ marginBottom: 8 }}>HalfGaugeProgress</h3>
+      <div style={{ display: 'flex', gap: 24, alignItems: 'flex-end', marginBottom: 24 }}>
+        <HalfGaugeProgress value={88} tone="success" size="sm" />
+        <HalfGaugeProgress value={55} tone="warning" />
+        <HalfGaugeProgress
+          value={92}
+          tone="info"
+          size="lg"
+          renderLabel={(v) => (
+            <span>
+              <strong style={{ fontSize: 24 }}>{v}</strong>
+              <span style={{ fontSize: 12, opacity: 0.7 }}> / 100</span>
+            </span>
+          )}
+        />
+        <HalfGaugeProgress value={25} tone="danger" size="lg"  />
+      </div>
       {/* 검색 Input */}
       <div style={{ margin: '16px 0', width: 300 }}>
         <Input
@@ -517,6 +557,7 @@ export function Report() {
           </div>
         ))}
       </div>
+
     </section>
   );
 }

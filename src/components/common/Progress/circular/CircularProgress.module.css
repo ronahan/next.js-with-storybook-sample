@@ -1,0 +1,57 @@
+/* =========================================================
+ * CircularProgress — 원형 프로그레스
+ * =======================================================*/
+
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Track (배경 원) ---- */
+.track {
+  fill: none;
+  stroke: var(--color-bg-tertiary, #334155);
+}
+
+/* ---- Fill (진행 원) ---- */
+.fill {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---- Tone ---- */
+.success { stroke: var(--color-success, #34d399); }
+.warning { stroke: var(--color-warning, #fbbf24); }
+.danger  { stroke: var(--color-error, #f87171); }
+.info    { stroke: var(--color-info, #60a5fa); }
+
+/* ---- Label (중앙 배치) ---- */
+.label {
+  position: absolute;
+  font-weight: 600;
+  color: var(--color-text-primary, #f1f5f9);
+  pointer-events: none;
+}
+
+.labelSm { font-size: 11px; }
+.labelMd { font-size: 14px; }
+.labelLg { font-size: 18px; }
+
+/* ---- Animation: pulse ---- */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+
+.animated {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ---- A11y: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .fill { transition: none; }
+  .animated { animation: none; }
+}

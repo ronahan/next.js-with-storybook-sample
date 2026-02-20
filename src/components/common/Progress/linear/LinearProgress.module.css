@@ -1,0 +1,52 @@
+/* =========================================================
+ * LinearProgress — 바 형태 프로그레스
+ * =======================================================*/
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ---- Track (배경) ---- */
+.track {
+  flex: 1;
+  background: var(--color-bg-tertiary, #334155);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* ---- Size ---- */
+.sm { height: 4px; }
+.md { height: 8px; }
+.lg { height: 12px; }
+
+/* ---- Bar (채움) ---- */
+.bar {
+  position: relative;
+  height: 100%;
+  border-radius: 9999px;
+  overflow: hidden;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---- Tone ---- */
+.success { background: var(--color-success, #34d399); }
+.warning { background: var(--color-warning, #fbbf24); }
+.danger  { background: var(--color-error, #f87171); }
+.info    { background: var(--color-info, #60a5fa); }
+
+/* ---- Label ---- */
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary, #cbd5e1);
+  white-space: nowrap;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ---- A11y: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .bar { transition: none; }
+}
